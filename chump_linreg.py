@@ -13,9 +13,10 @@ class ChumpLinearRegression:
         self.x = None
         self.y = None
         self.weights = None
-        self.bias = None
+        self.bias = 0
 
     def fit(self, x, y):
+        """fits """
         self.x = x
         self.y = y
 
@@ -41,15 +42,20 @@ class ChumpLinearRegression:
         return scaled_weight_product
 
     def update_weights(self):
+        """This performs one weight update step"""
 
-
+        # Gets residuals and x transpose
         y_pred = self.predict(self.x)
+        x_transpose = chump.transpose_matrix(x=self.x)
+        residuals = chump.sum_matrices(a=self.y, b=y_pred, operation='subtract')
 
-        x_transpose = chump.transpose_matrix(self.x)
+        # Gets derivatives
+        weights_dot = chump.dot_product(mat_a=x_transpose, mat_b=residuals)
+        dw = - (2 * weights_dot) / self.num_rows
+        db = - 2 * (sum(residuals) / self.num_rows)
 
-        residuals = chump.sum_matrices(a=self.y, b=y_pred)
+        # Applies learning rate on weights, biases
+        self.weights -= self.learning_rate * dw
+        self.bias -= self.learning_rate * db
 
-
-
-
-
+        return self
