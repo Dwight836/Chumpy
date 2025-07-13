@@ -5,11 +5,13 @@
 # Dwight Mayer, May 25th, 2025
 import numpy as np
 
+
 class Chumpy:
     def __init__(self):
         pass
 
-    def transpose_matrix(self, x):
+    @staticmethod
+    def transpose_matrix(x):
         # 2D lists only for now...
         # I should probably create a bad matrix class here.
         n_rows = len(x)
@@ -24,14 +26,32 @@ class Chumpy:
 
         return transposed_matrix
 
-    def dot_product(self, mat_a, mat_b):
+    @staticmethod
+    def dot_product(mat_a, mat_b):
+
+
+        # This should cast them into 2D vectors properly
+        if isinstance(mat_a[0], (int, float)):
+            mat_a = [[elem] for elem in mat_a]  # Convert 1D row vector to column matrix
+
+        if isinstance(mat_b[0], (int, float)):
+            mat_b = [[elem] for elem in mat_b]  # Convert 1D vector to column matrix
         # This assumes that mat_a and mat_b are both 2D lists
         # assert that n_cols A = n_rows B or vice versa...
         a_rows = len(mat_a)
         a_cols = len(mat_a[0])
 
+        print(f'Mat B: {mat_b}')
+
         b_rows = len(mat_b)
-        b_cols = len(mat_b[0])
+
+
+        # how to get the number of columns...
+        #b_cols = len(mat_b[0])
+        if type(mat_b[0]) == int:
+            b_cols = 1
+        else:
+            b_cols = len(mat_b[0])
 
         assert a_cols == b_rows, 'Bad structure'
 
@@ -47,7 +67,12 @@ class Chumpy:
         # Returns dot product of two matrices!
         return result
 
-    def sum_matrices(self, a, b, operation='subtract'):
+    @staticmethod
+    def sum_matrices(a, b, operation='subtract'):
+
+        if isinstance(a[0], (int, float)):
+            a = [[elem] for elem in a]
+
         # a and b are matrices of equal size
         rows = len(a)
         cols = len(a[0])
@@ -66,7 +91,8 @@ class Chumpy:
 
         return result
 
-    def sum_scalar(self, matrix, scalar):
+    @staticmethod
+    def sum_scalar(matrix, scalar):
         """A bad way of adding up scalars, to be honest"""
         # print(f'Scalar datatype: {type(scalar)}')
         # for each row
@@ -77,8 +103,8 @@ class Chumpy:
 
         return matrix
 
-    def create_zeros(self, n):
-
+    @staticmethod
+    def create_zeros(n):
         return [0 for _ in range(n)]
 
 

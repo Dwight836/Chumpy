@@ -3,7 +3,7 @@ import numpy as np
 # Some code taken from Geeks for Geeks. Thank you, geeks <3
 
 class LinearRegression:
-    def __init__(self, iterations=1000, learning_rate=0.001):
+    def __init__(self, iterations=10000, learning_rate=0.00001):
 
         self.iterations = iterations
         self.learning_rate = learning_rate

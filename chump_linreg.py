@@ -2,7 +2,7 @@ from chumpy import Chumpy as chump
 
 class ChumpLinearRegression:
 
-    def __init__(self, iterations=1000, learning_rate=0.001):
+    def __init__(self, iterations=10000, learning_rate=0.00001):
 
         self.iterations = iterations
         self.learning_rate = learning_rate
@@ -27,7 +27,7 @@ class ChumpLinearRegression:
         self.num_rows = len(x)
         print(f'Model num training examples: {len(x)}')
 
-        self.weights = chump.create_zeros(self.num_features)
+        self.weights = chump.create_zeros(n=self.num_features)
         print(f'Weights initialized')
 
         for i in range(self.iterations):
