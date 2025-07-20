@@ -32,6 +32,8 @@ class ChumpLinearRegression:
 
         for i in range(self.iterations):
             self.update_weights()
+            if i % 100 ==0:
+                print(f'Finished Loop #{i}')
 
         return self
 
@@ -51,11 +53,13 @@ class ChumpLinearRegression:
 
         # Gets derivatives
         weights_dot = chump.dot_product(mat_a=x_transpose, mat_b=residuals)
-        dw = - (2 * weights_dot) / self.num_rows
-        db = - 2 * (sum(residuals) / self.num_rows)
+        dw = [[-((2 * val) / self.num_rows) for val in row] for row in weights_dot]
+        flat_residuals = [val for sublist in residuals for val in sublist]
+        db = -2 * (sum(flat_residuals) / self.num_rows)
 
         # Applies learning rate on weights, biases
-        self.weights -= self.learning_rate * dw
-        self.bias -= self.learning_rate * db
+        scaled_dw = chump.scale_matrix(matrix=dw, scalar=self.learning_rate)
+        self.bias -= (self.learning_rate * db)
+        self.weights = chump.sum_matrices(a=self.weights, b=scaled_dw, operation='subtract')
 
         return self

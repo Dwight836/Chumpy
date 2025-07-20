@@ -29,7 +29,6 @@ class Chumpy:
     @staticmethod
     def dot_product(mat_a, mat_b):
 
-
         # This should cast them into 2D vectors properly
         if isinstance(mat_a[0], (int, float)):
             mat_a = [[elem] for elem in mat_a]  # Convert 1D row vector to column matrix
@@ -40,14 +39,7 @@ class Chumpy:
         # assert that n_cols A = n_rows B or vice versa...
         a_rows = len(mat_a)
         a_cols = len(mat_a[0])
-
-        print(f'Mat B: {mat_b}')
-
         b_rows = len(mat_b)
-
-
-        # how to get the number of columns...
-        #b_cols = len(mat_b[0])
         if type(mat_b[0]) == int:
             b_cols = 1
         else:
@@ -70,6 +62,8 @@ class Chumpy:
     @staticmethod
     def sum_matrices(a, b, operation='subtract'):
 
+        # if x = [1, 2, 3]
+        # f(x) = [[1], [2], [3]]
         if isinstance(a[0], (int, float)):
             a = [[elem] for elem in a]
 
@@ -94,7 +88,6 @@ class Chumpy:
     @staticmethod
     def sum_scalar(matrix, scalar):
         """A bad way of adding up scalars, to be honest"""
-        # print(f'Scalar datatype: {type(scalar)}')
         # for each row
         for i in range(len(matrix)):
             # for each column cell
@@ -107,27 +100,7 @@ class Chumpy:
     def create_zeros(n):
         return [0 for _ in range(n)]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @staticmethod
+    def scale_matrix(matrix, scalar):
+        return [[scalar * val for val in row] for row in matrix]
 
