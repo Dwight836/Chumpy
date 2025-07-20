@@ -1,10 +1,5 @@
-# This is an attempt to replicate numpy in Python
-# This will likely end badly
-# But I want to do it in Python to understand in Java
-# Performance will likely be horrendous
-# Dwight Mayer, May 25th, 2025
-import numpy as np
-
+"""Limited math engine, Dwight Mayer, May 25th, 2025 """
+# We have numpy at home!
 
 class Chumpy:
     def __init__(self):

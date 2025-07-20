@@ -1,5 +1,6 @@
 from chumpy import Chumpy as chump
 
+
 class ChumpLinearRegression:
 
     def __init__(self, iterations=10000, learning_rate=0.00001):
@@ -16,24 +17,24 @@ class ChumpLinearRegression:
         self.bias = 0
 
     def fit(self, x, y):
-        """fits """
+        """Runs the algorithm to fit the model :)  """
         self.x = x
         self.y = y
 
         # This assumes x is a 2D array
         self.num_features = len(x[0])
-        print(f'Model num features initialized at {len(x[0])}')
-
         self.num_rows = len(x)
-        print(f'Model num training examples: {len(x)}')
-
         self.weights = chump.create_zeros(n=self.num_features)
-        print(f'Weights initialized')
+
+        if False:
+            print(f'Model num features initialized at {len(x[0])}')
+            print(f'Model num training examples: {len(x)}')
+            print(f'Weights initialized')
 
         for i in range(self.iterations):
             self.update_weights()
-            if i % 100 ==0:
-                print(f'Finished Loop #{i}')
+            if i % 100 == 0:
+                print(f'Completed Loop #{i}')
 
         return self
 
